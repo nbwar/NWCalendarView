@@ -1,5 +1,4 @@
 # NWCalendarView
----
 
 **Usage**
 
