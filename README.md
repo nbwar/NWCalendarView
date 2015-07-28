@@ -1,5 +1,4 @@
 # NWCalendarView
----
 
 NWCalendar View is an IOS control that displays a calendar. It is perfect for appointment or availibilty selection. It allows for selection of a single date or a range. It also also to disable dates that are unavailable.
 
