@@ -37,8 +37,6 @@ Make sure to call `createCalendar()` setting your custom options
 
 
 **disable dates**
-
-
 ```swift
 // Takes an array of NSDates
 calendarView.disabledDates = [newDate, newDate2, newDate3]
@@ -46,11 +44,16 @@ calendarView.disabledDates = [newDate, newDate2, newDate3]
 
 **Set Max Months**
 
-You may only want to allow going aheader 4 months
+You may only want to allow going 4 months into the future
 ```swift
 calendarView.maxMonths = 4
 ```
 
+**Set selection Range** (defaults to 0)
+
+```swift
+selectionRangeLength = 7
+```
 
 ## Delegate
 
@@ -67,3 +70,8 @@ func didSelectDate(fromDate: NSDateComponents, toDate: NSDateComponents) {
   println("Selected date \(fromDate.date!) to date \(toDate.date!)")
 }
 ```
+
+## TODO
+1. Enable going into the past
+2. Dynamic adding on months when scrolling in either direction (endless calendar)
+3. Make all aspects customizable (font, colors, etc..)
