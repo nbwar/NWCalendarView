@@ -76,7 +76,7 @@ func didSelectDate(fromDate: NSDateComponents, toDate: NSDateComponents) {
 
 ## TODO
 1. Enable going into the past
-2. Dynamic adding on months when scrolling in either direction (endless calendar)
+2. Dynamic adding of months when scrolling in to past
 3. Make all aspects customizable (font, colors, etc..)
 4. Turn into cocoapod
 
