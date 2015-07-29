@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>FD70A818-B4AB-4752-8D23-E81854AB156C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NWCalendarDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E3BEA77FF9B9317B30640BB3478E4952B1D3AAAC</key>
+		<string>github.com:nbwar/NWCalendarView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NWCalendarDemo.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E3BEA77FF9B9317B30640BB3478E4952B1D3AAAC</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>github.com:nbwar/NWCalendarView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E3BEA77FF9B9317B30640BB3478E4952B1D3AAAC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E3BEA77FF9B9317B30640BB3478E4952B1D3AAAC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>NWCalendarDemo</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -21,17 +21,27 @@ class NWCalendarMonthContentView: UIScrollView {
   
   var monthContentViewDelegate:NWCalendarMonthContentViewDelegate?
   
-  var month         : NSDateComponents!
+  var presentMonth         : NSDateComponents!
   var monthViewsDict   = Dictionary<String, NWCalendarMonthView>()
   var monthViews    : [NWCalendarMonthView] = []
   
-  var dayViewHeight    : CGFloat = 44
-  var maxMonths        : Int!    = 0
-  var pastEnabled                = false
-  var presentMonthIndex: Int!    = 0
-  var selectionRangeLength: Int! = 0
-  var selectedDayViews: [NWCalendarDayView] = []
-  var lastMonthOrigin: CGFloat?
+  var dayViewHeight       : CGFloat             = 44
+  var pastEnabled                               = false
+  var presentMonthIndex   : Int!                = 0
+  var selectionRangeLength: Int!                = 0
+  var selectedDayViews    : [NWCalendarDayView] = []
+  var lastMonthOrigin     : CGFloat?
+  
+  var maxMonth            : NSDateComponents?
+  var maxMonths           : Int! = 0 {
+    didSet {
+      if maxMonths > 0 {
+        let date = NSCalendar.currentCalendar().dateByAddingUnit(.CalendarUnitMonth, value: maxMonths, toDate: presentMonth.date!, options: nil)!
+        let month = date.nwCalendarView_monthWithCalendar(presentMonth.calendar!)
+        maxMonth = month
+      }
+    }
+  }
   var futureEnabled: Bool {
     return maxMonths == 0
   }
@@ -71,6 +81,12 @@ class NWCalendarMonthContentView: UIScrollView {
         self.currentMonthView.isCurrentMonth = true
         oldMonthView.isCurrentMonth = false
       })
+      
+      if oldPage < currentPage {
+        appendMonthIfNeeded()
+      } else {
+        // TODO: Prepend for past
+      }
     }
   }
   
@@ -93,11 +109,11 @@ class NWCalendarMonthContentView: UIScrollView {
   
   convenience init(month: NSDateComponents, frame: CGRect) {
     self.init(frame: frame)
-    self.month = month
+    presentMonth = month
   }
   
   func createCalendar() {
-    setupMonths(month)
+    setupMonths(presentMonth)
   }
   
   func setupMonths(month: NSDateComponents) {
@@ -108,49 +124,7 @@ class NWCalendarMonthContentView: UIScrollView {
       
       
       offsetMonth = offsetMonth.calendar!.components(unitFlags, fromDate: offsetMonth.date!)
-      
-      
-      // Check for overlap with previous month
-      var overlapOffset:CGFloat = 0
-      var lastMonthMaxY:CGFloat = 0
-      if monthViews.count > 0 {
-        let lastMonthView = monthViews[monthViews.count-1]
-        lastMonthMaxY = CGRectGetMaxY(lastMonthView.frame)
-        
-        if lastMonthView.numberOfWeeks == 6 || monthStartsOnFirstDayOfWeek(offsetMonth) {
-          overlapOffset = dayViewHeight
-        } else {
-          overlapOffset = dayViewHeight * 2
-        }
-      }
-      
-      // Create & Position Month View
-      let monthView = cachedOrCreateMonthViewForMonth(offsetMonth)
-      
-      monthView.frame.origin.y = lastMonthMaxY - overlapOffset
-      monthViewOrigins.append(monthView.frame.origin.y)
-      
-      contentSize.height = lastMonthMaxY
-      
-      if !futureEnabled {
-        let maxMonth = maxMonths-1
-        if maxMonth == monthOffset {
-          lastMonthOrigin = monthView.frame.origin.y
-        } else if monthOffset > maxMonth {
-          monthView.disableMonth()
-        }
-        
-      }
-      
-      
-      if offsetMonth.month == month.month {
-        monthView.isCurrentMonth = true
-      }
-      
-      let key = monthViewKeyForMonth(offsetMonth)
-      if let disabledArray = disabledDatesDict[key] {
-        monthView.disabledDates = disabledArray
-      }
+      createMonthViewForMonth(offsetMonth)
     }
     
     scrollToOffset(monthViewOrigins[kCurrentMonthOffset], animated: false)
@@ -161,12 +135,17 @@ class NWCalendarMonthContentView: UIScrollView {
 // MARK: - Navigation
 extension NWCalendarMonthContentView {
   func nextMonth() {
-    var totalMonths = monthViews.count-1
-    if !futureEnabled {
-      totalMonths = maxMonths - 1 + kCurrentMonthOffset
+    if !futureEnabled && lastMonthOrigin != nil {
+      if monthViewOrigins[currentPage+1] <= lastMonthOrigin {
+        currentPage = currentPage+1
+        scrollToOffset(monthViewOrigins[currentPage], animated:true)
+      }
+    } else {
+      var totalMonths = monthViews.count-1
+      currentPage = min(currentPage+1, totalMonths)
+      scrollToOffset(monthViewOrigins[currentPage], animated:true)
     }
-    currentPage = min(currentPage+1, totalMonths)
-    scrollToOffset(monthViewOrigins[currentPage], animated:true)
+
   }
 
   func prevMonth() {
@@ -176,6 +155,73 @@ extension NWCalendarMonthContentView {
   
   func scrollToOffset(yOffset: CGFloat, animated: Bool) {
     setContentOffset(CGPoint(x: 0, y: yOffset), animated: animated)
+  }
+}
+  
+// MARK: - Layout
+extension NWCalendarMonthContentView {
+  func createMonthViewForMonth(month: NSDateComponents) {
+    var overlapOffset:CGFloat = 0
+    var lastMonthMaxY:CGFloat = 0
+    if monthViews.count > 0 {
+      let lastMonthView = monthViews[monthViews.count-1]
+      lastMonthMaxY = CGRectGetMaxY(lastMonthView.frame)
+      
+      if lastMonthView.numberOfWeeks == 6 || monthStartsOnFirstDayOfWeek(month) {
+        overlapOffset = dayViewHeight
+      } else {
+        overlapOffset = dayViewHeight * 2
+      }
+    }
+    
+    // Create & Position Month View
+    let monthView = cachedOrCreateMonthViewForMonth(month)
+    
+    monthView.frame.origin.y = lastMonthMaxY - overlapOffset
+    monthViewOrigins.append(monthView.frame.origin.y)
+    
+    contentSize.height = lastMonthMaxY
+    
+    if !futureEnabled {
+      if monthIsEqualToMaxMonth(monthView.month) {
+        lastMonthOrigin = monthView.frame.origin.y
+      } else if monthIsGreaterThanMaxMonth(monthView.month) {
+        
+        monthView.disableMonth()
+      }
+      
+    }
+    
+    
+    if monthIsEqualToPresentMonth(month) {
+      monthView.isCurrentMonth = true
+    }
+    
+    let key = monthViewKeyForMonth(month)
+    if let disabledArray = disabledDatesDict[key] {
+      monthView.disabledDates = disabledArray
+    }
+    
+  }
+  
+  func appendMonthIfNeeded() {
+    if currentPage >= monthViews.count - 3 {
+      let newMonth = monthViews.last!.month.copy() as! NSDateComponents
+      newMonth.month += 1
+      createMonthViewForMonth(newMonth.date!.nwCalendarView_monthWithCalendar(newMonth.calendar!))
+    }
+  }
+  
+  func monthIsEqualToPresentMonth(month: NSDateComponents) -> Bool {
+    return month.month == presentMonth.month && month.year == presentMonth.year
+  }
+  
+  func monthIsGreaterThanMaxMonth(month: NSDateComponents) -> Bool {
+    return maxMonth!.month < month.month && maxMonth!.year <= month.year
+  }
+  
+  func monthIsEqualToMaxMonth(month: NSDateComponents) -> Bool {
+    return maxMonth!.month == month.month && maxMonth!.year == month.year
   }
 }
 
@@ -224,7 +270,7 @@ extension NWCalendarMonthContentView: UIScrollViewDelegate {
     }
     
     // Disable scrolling to future beyond max month
-    if !futureEnabled {
+    if !futureEnabled && lastMonthOrigin != nil {
       if scrollView.contentOffset.y > lastMonthOrigin {
         setContentOffset(CGPoint(x: 0, y: lastMonthOrigin!), animated: false)
       }
@@ -241,7 +287,17 @@ extension NWCalendarMonthContentView: UIScrollViewDelegate {
       currentPage = (pastEnabled == false) ? max(currentPage-1, presentMonthIndex) : max(currentPage-1, 0)
       targetOffset = monthViewOrigins[currentPage]
     } else if targetOffset > currentOrigin+dayViewHeight {
-      currentPage = !futureEnabled ? min(currentPage+1,maxMonths - 1 + kCurrentMonthOffset) : min(currentPage+1, monthViews.count-1)
+      
+
+      
+      if !futureEnabled && lastMonthOrigin != nil {
+        if monthViewOrigins[currentPage+1] <= lastMonthOrigin {
+          currentPage = currentPage+1
+        }
+      } else {
+        currentPage = min(currentPage+1, monthViews.count-1)
+      }
+      
       targetOffset = monthViewOrigins[currentPage]
     } else {
       targetOffset = currentOrigin
@@ -254,28 +310,30 @@ extension NWCalendarMonthContentView: UIScrollViewDelegate {
 // MARK: - NWCalendarMonthViewDelegate
 extension NWCalendarMonthContentView: NWCalendarMonthViewDelegate {
   func didSelectDay(dayView: NWCalendarDayView) {
-    clearSelectedDays()
-    var day = dayView.day?.copy() as! NSDateComponents
-    
-    for i in 0..<selectionRangeLength {
-      day = day.date!.nwCalendarView_dayWithCalendar(day.calendar!)
-      let month = day.date!.nwCalendarView_monthWithCalendar(day.calendar!)
-      let monthViewKey = monthViewKeyForMonth(month)
-      let monthView = monthViewsDict[monthViewKey]
-      let dayView = monthView?.dayViewForDay(day)
+    if selectionRangeLength > 0 {
+      clearSelectedDays()
+      var day = dayView.day?.copy() as! NSDateComponents
       
-      if let unwrappedDayView = dayView {
-        unwrappedDayView.isSelected = true
-        selectedDayViews.append(unwrappedDayView)
+      for i in 0..<selectionRangeLength {
+        day = day.date!.nwCalendarView_dayWithCalendar(day.calendar!)
+        let month = day.date!.nwCalendarView_monthWithCalendar(day.calendar!)
+        let monthViewKey = monthViewKeyForMonth(month)
+        let monthView = monthViewsDict[monthViewKey]
+        let dayView = monthView?.dayViewForDay(day)
+        
+        if let unwrappedDayView = dayView {
+          unwrappedDayView.isSelected = true
+          selectedDayViews.append(unwrappedDayView)
+        }
+        
+        day.day += 1
       }
       
-      day.day += 1
+      day.day -= 1
+      day = day.date!.nwCalendarView_dayWithCalendar(day.calendar!)
+      changeMonthIfNeeded(dayView.day!, toDay: day)
+      monthContentViewDelegate?.didSelectDate(dayView.day!, toDate: day)
     }
-    
-    day.day -= 1
-    day = day.date!.nwCalendarView_dayWithCalendar(day.calendar!)
-    changeMonthIfNeeded(dayView.day!, toDay: day)
-    monthContentViewDelegate?.didSelectDate(dayView.day!, toDate: day)
   }
   
   func clearSelectedDays() {
@@ -293,7 +351,7 @@ extension NWCalendarMonthContentView: NWCalendarMonthViewDelegate {
     } else if fromDay.month > currentMonthView.month.month {
       nextMonth()
     } else if fromDay.month != toDay.month {
-      println("not equal")
+//      println("not equal")
     }
   }
 
