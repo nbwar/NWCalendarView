@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017180521B6953D100F439A7 /* NWCalendar-next-month.png in Resources */ = {isa = PBXBuildFile; fileRef = 0171804C1B6953D100F439A7 /* NWCalendar-next-month.png */; };
+		017180531B6953D100F439A7 /* NWCalendar-next-month@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0171804D1B6953D100F439A7 /* NWCalendar-next-month@2x.png */; };
+		017180541B6953D100F439A7 /* NWCalendar-next-month@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0171804E1B6953D100F439A7 /* NWCalendar-next-month@3x.png */; };
+		017180551B6953D100F439A7 /* NWCalendar-prev-month.png in Resources */ = {isa = PBXBuildFile; fileRef = 0171804F1B6953D100F439A7 /* NWCalendar-prev-month.png */; };
+		017180561B6953D100F439A7 /* NWCalendar-prev-month@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017180501B6953D100F439A7 /* NWCalendar-prev-month@2x.png */; };
+		017180571B6953D100F439A7 /* NWCalendar-prev-month@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017180511B6953D100F439A7 /* NWCalendar-prev-month@3x.png */; };
 		01899E431B61B9DF0085E4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E421B61B9DF0085E4DD /* AppDelegate.swift */; };
 		01899E451B61B9DF0085E4DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E441B61B9DF0085E4DD /* ViewController.swift */; };
 		01899E481B61B9DF0085E4DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01899E461B61B9DF0085E4DD /* Main.storyboard */; };
@@ -16,12 +22,6 @@
 		01899E641B61BA6C0085E4DD /* NWCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E631B61BA6C0085E4DD /* NWCalendarView.swift */; };
 		01899E661B61C3B70085E4DD /* NWCalendarMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E651B61C3B70085E4DD /* NWCalendarMenuView.swift */; };
 		01899E691B62B7D50085E4DD /* NWCalendarMonthSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E681B62B7D50085E4DD /* NWCalendarMonthSelectorView.swift */; };
-		01899E711B62B9510085E4DD /* NWCalendar-next-month.png in Resources */ = {isa = PBXBuildFile; fileRef = 01899E6B1B62B9510085E4DD /* NWCalendar-next-month.png */; };
-		01899E721B62B9510085E4DD /* NWCalendar-next-month@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01899E6C1B62B9510085E4DD /* NWCalendar-next-month@2x.png */; };
-		01899E731B62B9510085E4DD /* NWCalendar-next-month@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01899E6D1B62B9510085E4DD /* NWCalendar-next-month@3x.png */; };
-		01899E741B62B9510085E4DD /* NWCalendar-prev-month.png in Resources */ = {isa = PBXBuildFile; fileRef = 01899E6E1B62B9510085E4DD /* NWCalendar-prev-month.png */; };
-		01899E751B62B9510085E4DD /* NWCalendar-prev-month@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01899E6F1B62B9510085E4DD /* NWCalendar-prev-month@2x.png */; };
-		01899E761B62B9510085E4DD /* NWCalendar-prev-month@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01899E701B62B9510085E4DD /* NWCalendar-prev-month@3x.png */; };
 		01899E7A1B62CA7C0085E4DD /* NWCalendarMonthContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E791B62CA7C0085E4DD /* NWCalendarMonthContentView.swift */; };
 		01899E7C1B62CBAB0085E4DD /* NWCalendarMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E7B1B62CBAB0085E4DD /* NWCalendarMonthView.swift */; };
 		01899E7E1B62E2780085E4DD /* NWCalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E7D1B62E2780085E4DD /* NWCalendarDayView.swift */; };
@@ -40,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0171804C1B6953D100F439A7 /* NWCalendar-next-month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-next-month.png"; sourceTree = "<group>"; };
+		0171804D1B6953D100F439A7 /* NWCalendar-next-month@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-next-month@2x.png"; sourceTree = "<group>"; };
+		0171804E1B6953D100F439A7 /* NWCalendar-next-month@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-next-month@3x.png"; sourceTree = "<group>"; };
+		0171804F1B6953D100F439A7 /* NWCalendar-prev-month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-prev-month.png"; sourceTree = "<group>"; };
+		017180501B6953D100F439A7 /* NWCalendar-prev-month@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-prev-month@2x.png"; sourceTree = "<group>"; };
+		017180511B6953D100F439A7 /* NWCalendar-prev-month@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-prev-month@3x.png"; sourceTree = "<group>"; };
 		01899E3D1B61B9DF0085E4DD /* NWCalendarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWCalendarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01899E411B61B9DF0085E4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01899E421B61B9DF0085E4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -53,12 +59,6 @@
 		01899E631B61BA6C0085E4DD /* NWCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NWCalendarView.swift; sourceTree = "<group>"; };
 		01899E651B61C3B70085E4DD /* NWCalendarMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NWCalendarMenuView.swift; sourceTree = "<group>"; };
 		01899E681B62B7D50085E4DD /* NWCalendarMonthSelectorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NWCalendarMonthSelectorView.swift; sourceTree = "<group>"; };
-		01899E6B1B62B9510085E4DD /* NWCalendar-next-month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NWCalendar-next-month.png"; path = "../../../../Assets/StyleLend/icons/NWCalendar-next-month.png"; sourceTree = "<group>"; };
-		01899E6C1B62B9510085E4DD /* NWCalendar-next-month@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NWCalendar-next-month@2x.png"; path = "../../../../Assets/StyleLend/icons/NWCalendar-next-month@2x.png"; sourceTree = "<group>"; };
-		01899E6D1B62B9510085E4DD /* NWCalendar-next-month@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NWCalendar-next-month@3x.png"; path = "../../../../Assets/StyleLend/icons/NWCalendar-next-month@3x.png"; sourceTree = "<group>"; };
-		01899E6E1B62B9510085E4DD /* NWCalendar-prev-month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NWCalendar-prev-month.png"; path = "../../../../Assets/StyleLend/icons/NWCalendar-prev-month.png"; sourceTree = "<group>"; };
-		01899E6F1B62B9510085E4DD /* NWCalendar-prev-month@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NWCalendar-prev-month@2x.png"; path = "../../../../Assets/StyleLend/icons/NWCalendar-prev-month@2x.png"; sourceTree = "<group>"; };
-		01899E701B62B9510085E4DD /* NWCalendar-prev-month@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NWCalendar-prev-month@3x.png"; path = "../../../../Assets/StyleLend/icons/NWCalendar-prev-month@3x.png"; sourceTree = "<group>"; };
 		01899E791B62CA7C0085E4DD /* NWCalendarMonthContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NWCalendarMonthContentView.swift; sourceTree = "<group>"; };
 		01899E7B1B62CBAB0085E4DD /* NWCalendarMonthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NWCalendarMonthView.swift; sourceTree = "<group>"; };
 		01899E7D1B62E2780085E4DD /* NWCalendarDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NWCalendarDayView.swift; sourceTree = "<group>"; };
@@ -160,12 +160,12 @@
 		01899E6A1B62B8DA0085E4DD /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				01899E6B1B62B9510085E4DD /* NWCalendar-next-month.png */,
-				01899E6C1B62B9510085E4DD /* NWCalendar-next-month@2x.png */,
-				01899E6D1B62B9510085E4DD /* NWCalendar-next-month@3x.png */,
-				01899E6E1B62B9510085E4DD /* NWCalendar-prev-month.png */,
-				01899E6F1B62B9510085E4DD /* NWCalendar-prev-month@2x.png */,
-				01899E701B62B9510085E4DD /* NWCalendar-prev-month@3x.png */,
+				0171804C1B6953D100F439A7 /* NWCalendar-next-month.png */,
+				0171804D1B6953D100F439A7 /* NWCalendar-next-month@2x.png */,
+				0171804E1B6953D100F439A7 /* NWCalendar-next-month@3x.png */,
+				0171804F1B6953D100F439A7 /* NWCalendar-prev-month.png */,
+				017180501B6953D100F439A7 /* NWCalendar-prev-month@2x.png */,
+				017180511B6953D100F439A7 /* NWCalendar-prev-month@3x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -252,13 +252,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				01899E481B61B9DF0085E4DD /* Main.storyboard in Resources */,
-				01899E741B62B9510085E4DD /* NWCalendar-prev-month.png in Resources */,
-				01899E761B62B9510085E4DD /* NWCalendar-prev-month@3x.png in Resources */,
+				017180551B6953D100F439A7 /* NWCalendar-prev-month.png in Resources */,
+				017180571B6953D100F439A7 /* NWCalendar-prev-month@3x.png in Resources */,
 				01899E4D1B61B9DF0085E4DD /* LaunchScreen.xib in Resources */,
-				01899E731B62B9510085E4DD /* NWCalendar-next-month@3x.png in Resources */,
-				01899E711B62B9510085E4DD /* NWCalendar-next-month.png in Resources */,
-				01899E751B62B9510085E4DD /* NWCalendar-prev-month@2x.png in Resources */,
-				01899E721B62B9510085E4DD /* NWCalendar-next-month@2x.png in Resources */,
+				017180541B6953D100F439A7 /* NWCalendar-next-month@3x.png in Resources */,
+				017180521B6953D100F439A7 /* NWCalendar-next-month.png in Resources */,
+				017180561B6953D100F439A7 /* NWCalendar-prev-month@2x.png in Resources */,
+				017180531B6953D100F439A7 /* NWCalendar-next-month@2x.png in Resources */,
 				01899E4A1B61B9DF0085E4DD /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -484,6 +484,7 @@
 				01899E5E1B61B9DF0085E4DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01899E5F1B61B9DF0085E4DD /* Build configuration list for PBXNativeTarget "NWCalendarDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +493,7 @@
 				01899E611B61B9DF0085E4DD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
