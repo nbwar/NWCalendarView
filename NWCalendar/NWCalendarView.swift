@@ -9,8 +9,8 @@
 import UIKit
 
 @objc protocol NWCalendarViewDelegate {
-  func didChangeFromMonthToMonth(fromMonth: NSDateComponents, toMonth: NSDateComponents)
-  func didSelectDate(fromDate: NSDateComponents, toDate: NSDateComponents)
+  optional func didChangeFromMonthToMonth(fromMonth: NSDateComponents, toMonth: NSDateComponents)
+  optional func didSelectDate(fromDate: NSDateComponents, toDate: NSDateComponents)
 }
 
 
@@ -112,10 +112,10 @@ extension NWCalendarView: NWCalendarMenuViewDelegate {
 extension NWCalendarView: NWCalendarMonthContentViewDelegate {
   func didChangeFromMonthToMonth(fromMonth: NSDateComponents, toMonth: NSDateComponents) {
     visibleMonth = toMonth
-    delegate?.didChangeFromMonthToMonth(fromMonth, toMonth: toMonth)
+    delegate?.didChangeFromMonthToMonth?(fromMonth, toMonth: toMonth)
   }
   
   func didSelectDate(fromDate: NSDateComponents, toDate: NSDateComponents) {
-    delegate?.didSelectDate(fromDate, toDate: toDate)
+    delegate?.didSelectDate?(fromDate, toDate: toDate)
   }
 }
