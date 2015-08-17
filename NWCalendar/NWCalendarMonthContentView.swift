@@ -65,6 +65,44 @@ class NWCalendarMonthContentView: UIScrollView {
     }
   }
   
+  var selectedDatesDict: [String: [NSDateComponents]] = [String: [NSDateComponents]]()
+  var selectedDates: [NSDate]? {
+    didSet {
+      if let dates = selectedDates {
+        for date in dates {
+          let comp = NSCalendar.currentCalendar().components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekday | .CalendarUnitCalendar, fromDate: date)
+          let key = monthViewKeyForMonth(comp)
+          if var compArray = selectedDatesDict[key] {
+            compArray.append(comp)
+            selectedDatesDict[key] = compArray
+          } else {
+            let compArray:[NSDateComponents] = [comp]
+            selectedDatesDict[key] = compArray
+          }
+        }
+      }
+    }
+  }
+  
+  var availableDatesDict: [String: [NSDateComponents]] = [String: [NSDateComponents]]()
+  var availableDates: [NSDate]? {
+    didSet {
+      if let dates = availableDates {
+        for date in dates {
+          let comp = NSCalendar.currentCalendar().components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekday | .CalendarUnitCalendar, fromDate: date)
+          let key = monthViewKeyForMonth(comp)
+          if var compArray = availableDatesDict[key] {
+            compArray.append(comp)
+            availableDatesDict[key] = compArray
+          } else {
+            let compArray:[NSDateComponents] = [comp]
+            availableDatesDict[key] = compArray
+          }
+        }
+      }
+    }
+  }
+  
   var currentMonthView: NWCalendarMonthView! {
     return monthViews[currentPage]
   }
@@ -200,6 +238,14 @@ extension NWCalendarMonthContentView {
     let key = monthViewKeyForMonth(month)
     if let disabledArray = disabledDatesDict[key] {
       monthView.disabledDates = disabledArray
+    }
+    
+    if let availableArray = availableDatesDict[key] {
+      monthView.availableDates = availableArray
+    }
+    
+    if let selectedArray = selectedDatesDict[key] {
+      monthView.selectedDates = selectedArray
     }
     
   }

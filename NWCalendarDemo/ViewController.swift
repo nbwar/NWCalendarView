@@ -23,11 +23,15 @@ class ViewController: UIViewController {
     let newDate = date.dateByAddingTimeInterval(60*60*24*8)
     let newDate2 = date.dateByAddingTimeInterval(60*60*24*9)
     let newDate3 = date.dateByAddingTimeInterval(60*60*24*30)
-    calendarView.disabledDates = [newDate, newDate2, newDate3]
+//    calendarView.disabledDates = [newDate, newDate2, newDate3]
+    calendarView.availableDates = [newDate, newDate2, newDate3]
+    calendarView.selectedDates = [newDate, newDate2]
     calendarView.selectionRangeLength = 7
     calendarView.maxMonths = 4
     calendarView.delegate = self
     calendarView.createCalendar()
+    
+
   }
 
   override func didReceiveMemoryWarning() {

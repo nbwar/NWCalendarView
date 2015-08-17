@@ -59,6 +59,34 @@ class NWCalendarMonthView: UIView {
     }
   }
   
+  var availableDates:[NSDateComponents]? {
+    didSet {
+      
+      
+      if let availableDates = self.availableDates {
+        for dayView in dayViews {
+          if contains(availableDates, dayView.day!) {
+            dayView.isEnabled = true
+          } else {
+            dayView.isEnabled = false
+          }
+        }
+      }
+    }
+  }
+  
+  var selectedDates:[NSDateComponents]? {
+    didSet {
+      if let dates = selectedDates {
+        for selectedDate in dates {
+          let key = dayViewKeyForDay(selectedDate)
+          let dayView = dayViewsDict[key]
+          dayView?.isSelected = true
+        }
+      }
+    }
+  }
+  
   required init(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -126,7 +154,6 @@ extension NWCalendarMonthView {
           let dayViewKey = dayViewKeyForDay(day)
           dayViewsDict[dayViewKey] = dayView
           addSubview(dayView)
-          
         }
         day.day += 1
         nextDayViewOrigin.x += columnWidths![column]

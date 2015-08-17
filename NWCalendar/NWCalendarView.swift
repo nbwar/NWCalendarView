@@ -45,6 +45,18 @@ public class NWCalendarView: UIView {
     }
   }
   
+  public var selectedDates: [NSDate]? {
+    didSet {
+      monthContentView.selectedDates = selectedDates
+    }
+  }
+  
+  public var availableDates: [NSDate]? {
+    didSet {
+      monthContentView.availableDates = availableDates
+    }
+  }
+  
   // MARK: Initialization
   override public init(frame: CGRect) {
     super.init(frame: frame)
