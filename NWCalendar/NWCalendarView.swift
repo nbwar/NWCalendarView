@@ -94,8 +94,29 @@ public class NWCalendarView: UIView {
     updateMonthLabel(visibleMonth)
   }
   
-  func createCalendar() {
+  public func createCalendar() {
     monthContentView.createCalendar()
+  }
+  
+  
+  public func scrollToDate(date: NSDate, animated: Bool) {
+    let comp = NSCalendar.currentCalendar().components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekday | .CalendarUnitCalendar, fromDate: date)
+    
+    if maxMonths != nil && !monthContentView.monthIsGreaterThanMaxMonth(comp) {
+      println(monthContentView.monthIsGreaterThanMaxMonth(comp))
+      println(comp)
+      println(monthContentView.maxMonth)
+//      println(monthContentView.maxMonth?.month < comp.month)
+//      println(monthContentView.maxMonth?.year <= comp.year)
+      
+      println(comp.year > monthContentView.maxMonth?.year)
+      println(monthContentView.maxMonth?.month > comp.month && monthContentView.maxMonth?.year <= comp.year)
+//      maxMonth!.year > month.year || (month.month > maxMonth?.month && maxMonth?.year <= month.year)
+//      maxMonth!.month < month.month && maxMonth!.year <= month.year
+      updateMonthLabel(comp)
+      monthContentView.scrollToDate(comp, animated: animated)
+    }
+
   }
 }
 

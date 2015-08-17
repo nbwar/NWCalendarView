@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol NWCalendarMonthViewDelegate {
-  func didSelectDay(dayView: NWCalendarDayView)
+  func didSelectDay(dayView: NWCalendarDayView, notifyDelegate: Bool)
 }
 
 class NWCalendarMonthView: UIView {
@@ -80,8 +80,10 @@ class NWCalendarMonthView: UIView {
       if let dates = selectedDates {
         for selectedDate in dates {
           let key = dayViewKeyForDay(selectedDate)
-          let dayView = dayViewsDict[key]
-          dayView?.isSelected = true
+          if let dayView = dayViewsDict[key] {
+            delegate?.didSelectDay(dayView, notifyDelegate: false)
+          }
+          
         }
       }
     }
@@ -228,6 +230,6 @@ extension NWCalendarMonthView {
 // MARK: - NWCalendarDayViewDelegate
 extension NWCalendarMonthView: NWCalendarDayViewDelegate {
   func dayButtonPressed(dayView: NWCalendarDayView) {
-    delegate?.didSelectDay(dayView)
+    delegate?.didSelectDay(dayView, notifyDelegate: true)
   }
 }

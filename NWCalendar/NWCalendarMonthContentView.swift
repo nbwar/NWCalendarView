@@ -84,10 +84,12 @@ class NWCalendarMonthContentView: UIScrollView {
     }
   }
   
+  var showOnlyAvailableDates = false
   var availableDatesDict: [String: [NSDateComponents]] = [String: [NSDateComponents]]()
   var availableDates: [NSDate]? {
     didSet {
       if let dates = availableDates {
+        showOnlyAvailableDates = true
         for date in dates {
           let comp = NSCalendar.currentCalendar().components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekday | .CalendarUnitCalendar, fromDate: date)
           let key = monthViewKeyForMonth(comp)
@@ -194,6 +196,19 @@ extension NWCalendarMonthContentView {
   func scrollToOffset(yOffset: CGFloat, animated: Bool) {
     setContentOffset(CGPoint(x: 0, y: yOffset), animated: animated)
   }
+  
+  func scrollToDate(dateComps: NSDateComponents, animated: Bool) {
+    let key = monthViewKeyForMonth(dateComps)
+    
+    if let monthView = monthViewsDict[key] {
+      if let index = find(monthViews, monthView) {
+        if monthViewOrigins[index] <= lastMonthOrigin {
+          currentPage = index
+          scrollToOffset(monthViewOrigins[currentPage], animated: animated)
+        }
+      }
+    }
+  }
 }
   
 // MARK: - Layout
@@ -224,7 +239,6 @@ extension NWCalendarMonthContentView {
       if monthIsEqualToMaxMonth(monthView.month) {
         lastMonthOrigin = monthView.frame.origin.y
       } else if monthIsGreaterThanMaxMonth(monthView.month) {
-        
         monthView.disableMonth()
       }
       
@@ -242,6 +256,8 @@ extension NWCalendarMonthContentView {
     
     if let availableArray = availableDatesDict[key] {
       monthView.availableDates = availableArray
+    } else if showOnlyAvailableDates {
+      monthView.availableDates = []
     }
     
     if let selectedArray = selectedDatesDict[key] {
@@ -263,7 +279,7 @@ extension NWCalendarMonthContentView {
   }
   
   func monthIsGreaterThanMaxMonth(month: NSDateComponents) -> Bool {
-    return maxMonth!.month < month.month && maxMonth!.year <= month.year
+    return month.year > maxMonth?.year || (month.month > maxMonth?.month && maxMonth?.year <= month.year)
   }
   
   func monthIsEqualToMaxMonth(month: NSDateComponents) -> Bool {
@@ -355,7 +371,7 @@ extension NWCalendarMonthContentView: UIScrollViewDelegate {
 
 // MARK: - NWCalendarMonthViewDelegate
 extension NWCalendarMonthContentView: NWCalendarMonthViewDelegate {
-  func didSelectDay(dayView: NWCalendarDayView) {
+  func didSelectDay(dayView: NWCalendarDayView, notifyDelegate: Bool) {
     if selectionRangeLength > 0 {
       clearSelectedDays()
       var day = dayView.day?.copy() as! NSDateComponents
@@ -377,8 +393,12 @@ extension NWCalendarMonthContentView: NWCalendarMonthViewDelegate {
       
       day.day -= 1
       day = day.date!.nwCalendarView_dayWithCalendar(day.calendar!)
-      changeMonthIfNeeded(dayView.day!, toDay: day)
-      monthContentViewDelegate?.didSelectDate(dayView.day!, toDate: day)
+      
+      if notifyDelegate {
+        changeMonthIfNeeded(dayView.day!, toDay: day)
+        monthContentViewDelegate?.didSelectDate(dayView.day!, toDate: day)
+      }
+      
     }
   }
   

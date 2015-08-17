@@ -24,12 +24,14 @@ class ViewController: UIViewController {
     let newDate2 = date.dateByAddingTimeInterval(60*60*24*9)
     let newDate3 = date.dateByAddingTimeInterval(60*60*24*30)
 //    calendarView.disabledDates = [newDate, newDate2, newDate3]
-    calendarView.availableDates = [newDate, newDate2, newDate3]
-    calendarView.selectedDates = [newDate, newDate2]
+//    calendarView.availableDates = [newDate, newDate2, newDate3]
+    calendarView.selectedDates = [newDate3]
     calendarView.selectionRangeLength = 7
     calendarView.maxMonths = 4
     calendarView.delegate = self
     calendarView.createCalendar()
+    
+    calendarView.scrollToDate(newDate3, animated: true)
     
 
   }
