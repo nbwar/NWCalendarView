@@ -13,7 +13,7 @@ class NWCalendarMonthSelectorView: UIView {
   var nextButton: UIButton!
   var monthLabel: UILabel!
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -26,8 +26,6 @@ class NWCalendarMonthSelectorView: UIView {
 
     nextButton = UIButton(frame: CGRect(x: frame.width-buttonWidth, y: 0, width: buttonWidth, height: frame.height))
     nextButton.setImage(kNextButtonImage, forState: .Normal)
-    
-    var monthLabelFrame = CGRect()
 
     monthLabel = UILabel(frame: CGRect(x: buttonWidth, y: 0, width: frame.width-(2*buttonWidth), height: frame.height))
     monthLabel.textAlignment = .Center
@@ -45,7 +43,7 @@ class NWCalendarMonthSelectorView: UIView {
   
   
   private func addSeperator(y: CGFloat) {
-    var seperator = CALayer()
+    let seperator = CALayer()
     seperator.backgroundColor = kSeperatorColor.CGColor
     seperator.frame = CGRect(x: 0, y: y, width: frame.width, height: kSeperatorWidth)
     layer.addSublayer(seperator)

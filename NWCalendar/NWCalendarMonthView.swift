@@ -65,7 +65,7 @@ class NWCalendarMonthView: UIView {
       
       if let availableDates = self.availableDates {
         for dayView in dayViews {
-          if contains(availableDates, dayView.day!) {
+          if availableDates.contains(dayView.day!) {
             dayView.isEnabled = true
           } else {
             dayView.isEnabled = false
@@ -89,7 +89,7 @@ class NWCalendarMonthView: UIView {
     }
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -104,7 +104,7 @@ class NWCalendarMonthView: UIView {
     self.month = month
     calculateColumnWidths()
     createDays()
-    numberOfWeeks = month.calendar!.rangeOfUnit(.CalendarUnitWeekOfMonth, inUnit: .CalendarUnitMonth, forDate: month.date!).length
+    numberOfWeeks = month.calendar!.rangeOfUnit(.WeekOfMonth, inUnit: .Month, forDate: month.date!).length
   }
   
   func disableMonth() {
@@ -134,7 +134,7 @@ extension NWCalendarMonthView {
     let firstDate = day.calendar?.dateFromComponents(day)
     day = firstDate!.nwCalendarView_dayWithCalendar(month.calendar!)
     
-    let numberOfDaysInMonth = day.calendar?.rangeOfUnit(.CalendarUnitDay, inUnit: .CalendarUnitMonth, forDate: day.date!).length
+    let numberOfDaysInMonth = day.calendar?.rangeOfUnit(.Day, inUnit: .Month, forDate: day.date!).length
     
     var startColumn = day.weekday - day.calendar!.firstWeekday
     if startColumn < 0 {
@@ -147,7 +147,7 @@ extension NWCalendarMonthView {
     }
     
     
-    do {
+    repeat {
       for(var column = startColumn; column < kNumberOfDaysPerWeek; column++) {
         if day.month == month.month {
           let dayView = createDayView(nextDayViewOrigin, width: columnWidths![column])
@@ -197,7 +197,7 @@ extension NWCalendarMonthView {
       }
       
       
-      for (index, currentWidth) in enumerate(columnWidths!) {
+      for (index, _) in (columnWidths!).enumerate() {
         columnWidths![index] = width + padding
         
         remainder -= padding
@@ -218,7 +218,7 @@ extension NWCalendarMonthView {
 // MARK: - Touch Handling
 extension NWCalendarMonthView {
   override func pointInside(point: CGPoint, withEvent event: UIEvent?) -> Bool {
-    for subview in subviews as! [UIView] {
+    for subview in subviews {
       if !subview.hidden && subview.alpha > 0 && subview.userInteractionEnabled && subview.pointInside(convertPoint(point, toView: subview), withEvent: event) {
         return true
       }

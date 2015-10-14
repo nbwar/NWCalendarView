@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     calendarView.backgroundColor = UIColor.whiteColor()
     
     
-    var date = NSDate()
+    let date = NSDate()
     let newDate = date.dateByAddingTimeInterval(60*60*24*8)
     let newDate2 = date.dateByAddingTimeInterval(60*60*24*9)
     let newDate3 = date.dateByAddingTimeInterval(60*60*24*30)
@@ -45,10 +45,10 @@ class ViewController: UIViewController {
 
 extension ViewController: NWCalendarViewDelegate {
   func didChangeFromMonthToMonth(fromMonth: NSDateComponents, toMonth: NSDateComponents) {
-    println("Change From month \(fromMonth) to month \(toMonth)")
+    print("Change From month \(fromMonth) to month \(toMonth)")
   }
   
   func didSelectDate(fromDate: NSDateComponents, toDate: NSDateComponents) {
-    println("Selected date \(fromDate.date!) to date \(toDate.date!)")
+    print("Selected date \(fromDate.date!) to date \(toDate.date!)")
   }
 }

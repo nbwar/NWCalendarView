@@ -25,10 +25,10 @@ class NWCalendarMenuView: UIView {
   }
   
   init() {
-    super.init(frame: .zeroRect)
+    super.init(frame: .zero)
   }
   
-  required init(coder aDecoder: NSCoder) {
+  required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -47,7 +47,7 @@ class NWCalendarMenuView: UIView {
   
   func setupDays() {
     let dateFormatter = NSDateFormatter()
-    days = dateFormatter.shortWeekdaySymbols as! [String]
+    days = dateFormatter.shortWeekdaySymbols as [String]
   }
   
   
@@ -56,7 +56,7 @@ class NWCalendarMenuView: UIView {
     let height = sectionHeight
     
     var x:CGFloat = 0
-    var y:CGFloat = CGRectGetMaxY(monthSelectorView.frame)
+    let y:CGFloat = CGRectGetMaxY(monthSelectorView.frame)
     
     for i in 0..<7 {
       x = CGFloat(i) * width

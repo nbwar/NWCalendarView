@@ -17,7 +17,7 @@ import UIKit
 public class NWCalendarView: UIView {
   private let kMenuHeightPercentage:CGFloat = 0.256
   
-  var delegate: NWCalendarViewDelegate?
+  weak var delegate: NWCalendarViewDelegate?
   
   var menuView          : NWCalendarMenuView!
   var monthContentView  : NWCalendarMonthContentView!
@@ -65,7 +65,7 @@ public class NWCalendarView: UIView {
   }
   
   // IB Init
-  required public init(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
    
     commonInit()
@@ -74,7 +74,7 @@ public class NWCalendarView: UIView {
   func commonInit() {
     clipsToBounds = true
     
-    let unitFlags: NSCalendarUnit = .CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekday | .CalendarUnitCalendar
+    let unitFlags: NSCalendarUnit = [.Year, .Month, .Day, .Weekday, .Calendar]
     visibleMonth = NSCalendar.currentCalendar().components(unitFlags, fromDate: NSDate())
     visibleMonth.day = 1
     
@@ -100,19 +100,9 @@ public class NWCalendarView: UIView {
   
   
   public func scrollToDate(date: NSDate, animated: Bool) {
-    let comp = NSCalendar.currentCalendar().components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekday | .CalendarUnitCalendar, fromDate: date)
+    let comp = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
     
     if maxMonths != nil && !monthContentView.monthIsGreaterThanMaxMonth(comp) {
-      println(monthContentView.monthIsGreaterThanMaxMonth(comp))
-      println(comp)
-      println(monthContentView.maxMonth)
-//      println(monthContentView.maxMonth?.month < comp.month)
-//      println(monthContentView.maxMonth?.year <= comp.year)
-      
-      println(comp.year > monthContentView.maxMonth?.year)
-      println(monthContentView.maxMonth?.month > comp.month && monthContentView.maxMonth?.year <= comp.year)
-//      maxMonth!.year > month.year || (month.month > maxMonth?.month && maxMonth?.year <= month.year)
-//      maxMonth!.month < month.month && maxMonth!.year <= month.year
       updateMonthLabel(comp)
       monthContentView.scrollToDate(comp, animated: animated)
     }

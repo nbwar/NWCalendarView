@@ -11,11 +11,11 @@ import UIKit
 
 extension NSDate {
   func nwCalendarView_dayWithCalendar(calendar: NSCalendar) -> NSDateComponents {
-    return calendar.components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay | .CalendarUnitWeekday | .CalendarUnitCalendar, fromDate: self)
+    return calendar.components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: self)
   }
   
   func nwCalendarView_monthWithCalendar(calendar: NSCalendar) -> NSDateComponents {
-    return calendar.components(.CalendarUnitCalendar | .CalendarUnitYear | .CalendarUnitMonth, fromDate: self)
+    return calendar.components([.Calendar, .Year, .Month], fromDate: self)
   }
   
   func nwCalendarView_dayIsInPast() -> Bool {
