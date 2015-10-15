@@ -35,8 +35,7 @@ class NWCalendarDayView: UIView {
   }
   
   var day: NSDateComponents? {
-    didSet {
-      day?.timeZone = NSTimeZone(name: "UTC")
+    didSet {      
       date = day?.date
       dayButton.setTitle("\(day!.day)", forState: .Normal)
     }

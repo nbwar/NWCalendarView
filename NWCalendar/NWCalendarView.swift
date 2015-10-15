@@ -75,7 +75,9 @@ public class NWCalendarView: UIView {
     clipsToBounds = true
     
     let unitFlags: NSCalendarUnit = [.Year, .Month, .Day, .Weekday, .Calendar]
-    visibleMonth = NSCalendar.currentCalendar().components(unitFlags, fromDate: NSDate())
+    let calendar = NSCalendar.currentCalendar()
+    calendar.timeZone = NSTimeZone(abbreviation: "UTC")!
+    visibleMonth = calendar.components(unitFlags, fromDate: NSDate())
     visibleMonth.day = 1
     
     let menuHeight = floor(frame.height*kMenuHeightPercentage)
