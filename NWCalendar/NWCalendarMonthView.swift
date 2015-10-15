@@ -61,8 +61,6 @@ class NWCalendarMonthView: UIView {
   
   var availableDates:[NSDateComponents]? {
     didSet {
-      
-      
       if let availableDates = self.availableDates {
         for dayView in dayViews {
           if availableDates.contains(dayView.day!) {

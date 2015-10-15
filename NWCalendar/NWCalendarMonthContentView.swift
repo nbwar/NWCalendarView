@@ -155,7 +155,7 @@ class NWCalendarMonthContentView: UIScrollView {
   func createCalendar() {
     setupMonths(presentMonth)
   }
-  
+
   func setupMonths(month: NSDateComponents) {
     for (var monthOffset = -kCurrentMonthOffset; monthOffset <= 7; monthOffset+=1) {
       var offsetMonth = month.copy() as! NSDateComponents
