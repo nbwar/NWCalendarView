@@ -20,8 +20,8 @@ class ViewController: UIViewController {
     
     
     let date = NSDate()
-    let newDate = date.dateByAddingTimeInterval(60*60*24*8)
-    let newDate2 = date.dateByAddingTimeInterval(60*60*24*9)
+//    let newDate = date.dateByAddingTimeInterval(60*60*24*8)
+//    let newDate2 = date.dateByAddingTimeInterval(60*60*24*9)
     let newDate3 = date.dateByAddingTimeInterval(60*60*24*30)
 //    calendarView.disabledDates = [newDate, newDate2, newDate3]
 //    calendarView.availableDates = [newDate, newDate2, newDate3]
@@ -45,10 +45,16 @@ class ViewController: UIViewController {
 
 extension ViewController: NWCalendarViewDelegate {
   func didChangeFromMonthToMonth(fromMonth: NSDateComponents, toMonth: NSDateComponents) {
-    print("Change From month \(fromMonth) to month \(toMonth)")
+    let dateFormatter: NSDateFormatter = NSDateFormatter()
+    
+    let months = dateFormatter.standaloneMonthSymbols
+    let fromMonthName = months[fromMonth.month-1] as String
+    let toMonthName = months[toMonth.month-1] as String
+    
+    print("Change From '\(fromMonthName)' to '\(toMonthName)'")
   }
   
   func didSelectDate(fromDate: NSDateComponents, toDate: NSDateComponents) {
-    print("Selected date \(fromDate.date!) to date \(toDate.date!)")
+    print("Selected date '\(fromDate.month)/\(fromDate.day)/\(fromDate.year)' to date '\(toDate.month)/\(toDate.day)/\(toDate.year)'")
   }
 }
