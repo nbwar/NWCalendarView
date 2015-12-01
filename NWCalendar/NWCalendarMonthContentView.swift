@@ -36,7 +36,7 @@ class NWCalendarMonthContentView: UIScrollView {
   var maxMonths           : Int! = 0 {
     didSet {
       if maxMonths > 0 {
-        let date = NSCalendar.currentCalendar().dateByAddingUnit(.Month, value: maxMonths, toDate: presentMonth.date!, options: [])!
+        let date = NSCalendar.usLocaleCurrentCalendar().dateByAddingUnit(.Month, value: maxMonths, toDate: presentMonth.date!, options: [])!
         let month = date.nwCalendarView_monthWithCalendar(presentMonth.calendar!)
         maxMonth = month
       }
@@ -51,7 +51,7 @@ class NWCalendarMonthContentView: UIScrollView {
     didSet {
       if let dates = disabledDates {
         for date in dates {
-          let comp = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
+          let comp = NSCalendar.usLocaleCurrentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
           let key = monthViewKeyForMonth(comp)
           if var compArray = disabledDatesDict[key] {
             compArray.append(comp)
@@ -70,7 +70,7 @@ class NWCalendarMonthContentView: UIScrollView {
     didSet {
       if let dates = selectedDates {
         for date in dates {
-          let comp = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
+          let comp = NSCalendar.usLocaleCurrentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
           let key = monthViewKeyForMonth(comp)
           if var compArray = selectedDatesDict[key] {
             compArray.append(comp)
@@ -91,7 +91,7 @@ class NWCalendarMonthContentView: UIScrollView {
       if let dates = availableDates {
         showOnlyAvailableDates = true
         for date in dates {
-          let comp = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
+          let comp = NSCalendar.usLocaleCurrentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
           let key = monthViewKeyForMonth(comp)
           if var compArray = availableDatesDict[key] {
             compArray.append(comp)

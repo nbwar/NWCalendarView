@@ -75,7 +75,8 @@ public class NWCalendarView: UIView {
     clipsToBounds = true
     
     let unitFlags: NSCalendarUnit = [.Year, .Month, .Day, .Weekday, .Calendar]
-    visibleMonth = NSCalendar.currentCalendar().components(unitFlags, fromDate: NSDate())
+    visibleMonth = NSCalendar.usLocaleCurrentCalendar().components(unitFlags, fromDate: NSDate())
+    
     visibleMonth.day = 1
     
     let menuHeight = floor(frame.height*kMenuHeightPercentage)
@@ -100,7 +101,7 @@ public class NWCalendarView: UIView {
   
   
   public func scrollToDate(date: NSDate, animated: Bool) {
-    let comp = NSCalendar.currentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
+    let comp = NSCalendar.usLocaleCurrentCalendar().components([.Year, .Month, .Day, .Weekday, .Calendar], fromDate: date)
     
     if maxMonths != nil && !monthContentView.monthIsGreaterThanMaxMonth(comp) {
       updateMonthLabel(comp)

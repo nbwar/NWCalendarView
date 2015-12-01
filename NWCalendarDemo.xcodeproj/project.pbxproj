@@ -13,6 +13,7 @@
 		017180551B6953D100F439A7 /* NWCalendar-prev-month.png in Resources */ = {isa = PBXBuildFile; fileRef = 0171804F1B6953D100F439A7 /* NWCalendar-prev-month.png */; };
 		017180561B6953D100F439A7 /* NWCalendar-prev-month@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017180501B6953D100F439A7 /* NWCalendar-prev-month@2x.png */; };
 		017180571B6953D100F439A7 /* NWCalendar-prev-month@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017180511B6953D100F439A7 /* NWCalendar-prev-month@3x.png */; };
+		0172C1511C0E373F000BC9D5 /* NSCalendar+NWCalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0172C1501C0E373F000BC9D5 /* NSCalendar+NWCalendarView.swift */; };
 		01899E431B61B9DF0085E4DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E421B61B9DF0085E4DD /* AppDelegate.swift */; };
 		01899E451B61B9DF0085E4DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01899E441B61B9DF0085E4DD /* ViewController.swift */; };
 		01899E481B61B9DF0085E4DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01899E461B61B9DF0085E4DD /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		0171804F1B6953D100F439A7 /* NWCalendar-prev-month.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-prev-month.png"; sourceTree = "<group>"; };
 		017180501B6953D100F439A7 /* NWCalendar-prev-month@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-prev-month@2x.png"; sourceTree = "<group>"; };
 		017180511B6953D100F439A7 /* NWCalendar-prev-month@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NWCalendar-prev-month@3x.png"; sourceTree = "<group>"; };
+		0172C1501C0E373F000BC9D5 /* NSCalendar+NWCalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSCalendar+NWCalendarView.swift"; sourceTree = "<group>"; };
 		01899E3D1B61B9DF0085E4DD /* NWCalendarDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NWCalendarDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01899E411B61B9DF0085E4DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01899E421B61B9DF0085E4DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				01899E7B1B62CBAB0085E4DD /* NWCalendarMonthView.swift */,
 				01899E7D1B62E2780085E4DD /* NWCalendarDayView.swift */,
 				01899E7F1B62E7AD0085E4DD /* NSDate+NWCalendarView.swift */,
+				0172C1501C0E373F000BC9D5 /* NSCalendar+NWCalendarView.swift */,
 				01899E811B6306110085E4DD /* NWCalendarCache.swift */,
 			);
 			path = NWCalendar;
@@ -289,6 +292,7 @@
 				01899E661B61C3B70085E4DD /* NWCalendarMenuView.swift in Sources */,
 				01899E641B61BA6C0085E4DD /* NWCalendarView.swift in Sources */,
 				01899E821B6306110085E4DD /* NWCalendarCache.swift in Sources */,
+				0172C1511C0E373F000BC9D5 /* NSCalendar+NWCalendarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
