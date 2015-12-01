@@ -300,7 +300,6 @@ extension NWCalendarMonthContentView {
   
   func cachedOrCreateMonthViewForMonth(month: NSDateComponents) -> NWCalendarMonthView {
     let month = month.calendar?.components(unitFlags, fromDate: month.date!)
-    
     let monthViewKey = monthViewKeyForMonth(month!)
     var monthView = monthViewsDict[monthViewKey]
     
@@ -349,8 +348,6 @@ extension NWCalendarMonthContentView: UIScrollViewDelegate {
       targetOffset = monthViewOrigins[currentPage]
     } else if targetOffset > currentOrigin+dayViewHeight {
       
-
-      
       if !futureEnabled && lastMonthOrigin != nil {
         if monthViewOrigins[currentPage+1] <= lastMonthOrigin {
           currentPage = currentPage+1
@@ -383,8 +380,7 @@ extension NWCalendarMonthContentView: NWCalendarMonthViewDelegate {
         let dayView = monthView?.dayViewForDay(day)
         
         if let unwrappedDayView = dayView {
-          unwrappedDayView.isSelected = true
-          selectedDayViews.append(unwrappedDayView)
+          selectDay(unwrappedDayView)
         }
         
         day.day += 1
@@ -399,6 +395,11 @@ extension NWCalendarMonthContentView: NWCalendarMonthViewDelegate {
       }
       
     }
+  }
+  
+  func selectDay(dayView: NWCalendarDayView) {
+    dayView.isSelected = true
+    selectedDayViews.append(dayView)
   }
   
   func clearSelectedDays() {

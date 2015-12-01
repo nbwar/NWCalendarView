@@ -11,6 +11,7 @@ import UIKit
 
 protocol NWCalendarMonthViewDelegate {
   func didSelectDay(dayView: NWCalendarDayView, notifyDelegate: Bool)
+  func selectDay(dayView: NWCalendarDayView)
 }
 
 class NWCalendarMonthView: UIView {
@@ -79,7 +80,7 @@ class NWCalendarMonthView: UIView {
         for selectedDate in dates {
           let key = dayViewKeyForDay(selectedDate)
           if let dayView = dayViewsDict[key] {
-            delegate?.didSelectDay(dayView, notifyDelegate: false)
+            delegate?.selectDay(dayView)
           }
           
         }
