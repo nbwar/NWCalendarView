@@ -411,13 +411,14 @@ extension NWCalendarMonthContentView: NWCalendarMonthViewDelegate {
   }
   
   func changeMonthIfNeeded(fromDay: NSDateComponents, toDay: NSDateComponents) {
-    
-    if fromDay.month < currentMonthView.month.month {
+    if fromDay.month < currentMonthView.month.month && fromDay.year <= currentMonthView.month.year{
       prevMonth()
-    } else if fromDay.month > currentMonthView.month.month {
+    } else if fromDay.month > currentMonthView.month.month && fromDay.year >= currentMonthView.month.year {
       nextMonth()
-    } else if fromDay.month != toDay.month {
-//      println("not equal")
+    } else if fromDay.year > currentMonthView.month.year {
+      nextMonth()
+    } else if fromDay.year < currentMonthView.month.year {
+      prevMonth()
     }
   }
 
