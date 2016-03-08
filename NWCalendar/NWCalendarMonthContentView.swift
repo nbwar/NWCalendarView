@@ -220,7 +220,11 @@ extension NWCalendarMonthContentView {
       lastMonthMaxY = CGRectGetMaxY(lastMonthView.frame)
       
       if lastMonthView.numberOfWeeks == 6 || monthStartsOnFirstDayOfWeek(month) {
-        overlapOffset = dayViewHeight
+        if lastMonthView.numberOfWeeks == 4 {
+            overlapOffset = self.dayViewHeight * 2
+        } else {
+            overlapOffset = self.dayViewHeight
+        }
       } else {
         overlapOffset = dayViewHeight * 2
       }
