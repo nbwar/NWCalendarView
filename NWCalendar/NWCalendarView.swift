@@ -27,6 +27,12 @@ public class NWCalendarView: UIView {
     }
   }
   
+  public var disableSundays:Bool = false {
+    didSet {
+      monthContentView.disableSundays = disableSundays
+    }
+  }
+  
   public var selectionRangeLength: Int? {
     didSet {
       monthContentView.selectionRangeLength = selectionRangeLength

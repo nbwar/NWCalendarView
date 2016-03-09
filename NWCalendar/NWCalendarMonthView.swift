@@ -65,7 +65,11 @@ class NWCalendarMonthView: UIView {
       if let availableDates = self.availableDates {
         for dayView in dayViews {
           if availableDates.contains(dayView.day!) {
-            dayView.isEnabled = true
+            if disableSundays && dayView.day?.weekday == 1 {
+              dayView.isEnabled = false
+            } else {
+              dayView.isEnabled = true
+            }
           } else {
             dayView.isEnabled = false
           }
@@ -88,6 +92,8 @@ class NWCalendarMonthView: UIView {
     }
   }
   
+  var disableSundays: Bool = false
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -96,11 +102,12 @@ class NWCalendarMonthView: UIView {
     super.init(frame: frame)
   }
   
-  convenience init(month: NSDateComponents, width: CGFloat, height: CGFloat) {
+  convenience init(month: NSDateComponents, width: CGFloat, height: CGFloat, disableSundays: Bool=false) {
     self.init(frame: CGRect(x: 0, y: 0, width: width, height: height))
     backgroundColor = UIColor.clearColor()
     dayViewHeight = frame.height/kRowCount
     self.month = month
+    self.disableSundays = disableSundays
     calculateColumnWidths()
     createDays()
     numberOfWeeks = month.calendar!.rangeOfUnit(.WeekOfMonth, inUnit: .Month, forDate: month.date!).length
@@ -123,16 +130,9 @@ class NWCalendarMonthView: UIView {
 // MARK: - Layout
 extension NWCalendarMonthView {
   func createDays() {
-    var day = NSDateComponents()
-    day.calendar = month.calendar
-    day.day = 1
-    day.month = month.month
-    day.year = month.year
-
     
-    let firstDate = day.calendar?.dateFromComponents(day)
-    day = firstDate!.nwCalendarView_dayWithCalendar(month.calendar!)
-    
+    let date: NSDate! = month.calendar?.dateFromComponents(month)!
+    var day = month.calendar!.components([.Day, .Weekday, .Month, .Year, .Calendar], fromDate: date)
     let numberOfDaysInMonth = day.calendar?.rangeOfUnit(.Day, inUnit: .Month, forDate: day.date!).length
     
     var startColumn = day.weekday - day.calendar!.firstWeekday
@@ -146,29 +146,32 @@ extension NWCalendarMonthView {
     }
     
     
-    repeat {
+    while (day.day <= numberOfDaysInMonth && day.month == month.month) {
       for(var column = startColumn; column < kNumberOfDaysPerWeek; column++) {
         if day.month == month.month {
           let dayView = createDayView(nextDayViewOrigin, width: columnWidths![column])
           dayView.delegate = self
           dayView.setDayForDay(day)
+          
+          // Disable Sundays
+          if day.weekday == 1 && disableSundays {
+            dayView.isEnabled = false
+          }
+          
+          
           let dayViewKey = dayViewKeyForDay(day)
           dayViewsDict[dayViewKey] = dayView
           addSubview(dayView)
         }
-        day.day += 1
+        let nextDate = day.calendar?.dateByAddingUnit(.Day, value: 1, toDate: day.date!, options: NSCalendarOptions(rawValue: 0))
+        day = nextDate!.nwCalendarView_dayWithCalendar(day.calendar!)
         nextDayViewOrigin.x += columnWidths![column]
-        
-        if day.day > numberOfDaysInMonth {
-          break
-        }
       }
       
       nextDayViewOrigin.x = 0
       nextDayViewOrigin.y += dayViewHeight
       startColumn = 0
-    } while (day.day <= numberOfDaysInMonth)
-    
+    }
   }
   
   func createDayView(origin: CGPoint, width: CGFloat)-> NWCalendarDayView {

@@ -20,12 +20,14 @@ class ViewController: UIViewController {
     
     
     let date = NSDate()
-//    let newDate = date.dateByAddingTimeInterval(60*60*24*8)
-    let newDate2 = date.dateByAddingTimeInterval(60*60*24*9)
-    let newDate3 = date.dateByAddingTimeInterval(60*60*24*29)
-//    calendarView.disabledDates = [newDate, newDate2, newDate3]
+//    let newDate = date.dateByAddingTimeInterval(60*60*24*2)
+    let newDate2 = date.dateByAddingTimeInterval(60*60*24*3)
+    let newDate3 = date.dateByAddingTimeInterval(60*60*24*4)
+    print(newDate3)
+    calendarView.disabledDates = [newDate3]
+//    calendarView.disableSundays = true
 //    calendarView.availableDates = [newDate, newDate2, newDate3]
-    calendarView.selectedDates = [newDate3, newDate2]
+    calendarView.selectedDates = [newDate2]
     calendarView.selectionRangeLength = 7
     calendarView.maxMonths = 4
     calendarView.delegate = self

@@ -105,6 +105,8 @@ class NWCalendarMonthContentView: UIScrollView {
     }
   }
   
+  var disableSundays: Bool = false
+  
   var currentMonthView: NWCalendarMonthView! {
     return monthViews[currentPage]
   }
@@ -243,10 +245,8 @@ extension NWCalendarMonthContentView {
         lastMonthOrigin = monthView.frame.origin.y
       } else if monthIsGreaterThanMaxMonth(monthView.month) {
         monthView.disableMonth()
-      }
-      
+      } 
     }
-    
     
     if monthIsEqualToPresentMonth(month) {
       monthView.isCurrentMonth = true
@@ -308,7 +308,7 @@ extension NWCalendarMonthContentView {
     var monthView = monthViewsDict[monthViewKey]
     
     if monthView == nil {
-      monthView = NWCalendarMonthView(month: month!, width: bounds.width, height: bounds.height)
+      monthView = NWCalendarMonthView(month: month!, width: bounds.width, height: bounds.height, disableSundays: disableSundays)
       monthViewsDict[monthViewKey] = monthView
       monthViews.append(monthView!)
       monthView?.delegate = self
